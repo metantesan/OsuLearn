@@ -1,0 +1,9 @@
+python-ipykernel
+python-jupyter
+python-numpy
+python-pandas 
+python-pillow 
+python-pygame
+python-scikit-learn
+python-scipy
+python-tensorflow-cuda 2.15.0-6
