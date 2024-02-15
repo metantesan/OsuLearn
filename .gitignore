@@ -140,9 +140,3 @@ dmypy.json
 .history
 
 # End of https://www.gitignore.io/api/python,jupyternotebook,visualstudiocode
-
-*.hdf5
-*.npy
-.vscode/
-.data/
-.generated/

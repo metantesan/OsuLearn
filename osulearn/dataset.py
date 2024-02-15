@@ -95,11 +95,13 @@ def input_data(dataset, verbose=False):
     _memo = {}
 
     if isinstance(dataset, osu_beatmap.Beatmap):
-        dataset = pd.DataFrame([dataset], columns=['beatmap'])
+        print(type(dataset))
+        print(dataset)
+        dataset = pd.DataFrame(list(dataset), columns=['beatmap'])
 
     beatmaps = dataset['beatmap']
 
-    for index, beatmap in beatmaps.iteritems():
+    for index, beatmap in beatmaps.items():
         if verbose:
             _print_progress_bar(beatmaps.map(lambda b: b['Title']), index)
 
@@ -150,8 +152,8 @@ def input_data(dataset, verbose=False):
         print()
         print()
 
-    data = pad_sequences(np.array(data), maxlen=BATCH_LENGTH,
-                            dtype='float', padding='post', value=0)
+    data = pad_sequences(np.asarray(data,dtype=object), maxlen=BATCH_LENGTH,
+                            dtype="float", padding='post', value=0)
     
     index = pd.MultiIndex.from_product([
         range(len(data)), range(BATCH_LENGTH)
@@ -195,7 +197,7 @@ def target_data(dataset, verbose=False):
         print()
         print()
 
-    data = pad_sequences(np.array(target_data), maxlen=BATCH_LENGTH, dtype='float', padding='post', value=0)
+    data = pad_sequences(np.asarray(target_data,dtype=object), maxlen=BATCH_LENGTH, dtype="float", padding='post', value=0)
     index = pd.MultiIndex.from_product([range(len(data)), range(BATCH_LENGTH)], names=['chunk', 'frame'])
     return pd.DataFrame(np.reshape(data, (-1, len(OUTPUT_FEATURES))), index=index, columns=OUTPUT_FEATURES, dtype=np.float32)
 
